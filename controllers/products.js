@@ -2,17 +2,22 @@ const Product=require('../models/product')
 
 
 const getAllProductsStatic=async(req,res)=>{
-    const product=await Product.find({name:'vase table'})
+    const search='ab'
+    const product=await Product.find({
+        name:{$regex: search,$options:'i'}
+    
+    })
     res.status(200).json({product,nbHits:product.length})
 }
 
 const getAllProducts=async(req,res)=>{
     const {featured}=req.query;
+console.log(typeof(featured))
 const queryObject={}
 if(featured){
     queryObject.featured=featured==='true'?true:false
 }
-
+const product=await Product.find(queryObject)
 
     res.status(200).json({product,nbHits:product.length})
 }
