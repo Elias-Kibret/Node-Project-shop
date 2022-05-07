@@ -51,6 +51,7 @@ if(numericFilters){
     console.log(item)
         const [field ,operator,value]=item.split('-')
         if(options.includes(field)){
+            console.log(options)
             queryObject[field]={[operator]:Number(value)}
         }
     })
