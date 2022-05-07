@@ -53,6 +53,7 @@ if(numericFilters){
         if(options.includes(field)){
             console.log(options)
             queryObject[field]={[operator]:Number(value)}
+            console.log(queryObject)
         }
     })
     console.log(queryObject)
