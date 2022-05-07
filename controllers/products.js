@@ -3,7 +3,11 @@ const Product=require('../models/product')
 
 const getAllProductsStatic=async(req,res)=>{
     const search='ab'
-    const product=await Product.find({}).select('id')
+    const product=await Product.find({price:{$gt:30}})
+                                       .sort('name')
+                                       .select('name price')
+                                       .limit(4)
+                                       .skip(5)
     res.status(200).json({product,nbHits:product.length})
 }
 
@@ -30,6 +34,11 @@ if(fields){
     console.log(FieldLists)
     result=result.select(FieldLists)     
 }
+
+const page =Number(req.query.page)||1;
+const limit=Number(req.query.limit) || 10
+const skip=(page-1)*limit;
+result =result.skip(skip).limit(limit)
 const product=await result
 
 
