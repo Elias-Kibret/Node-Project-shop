@@ -48,7 +48,7 @@ if(numericFilters){
 
     console.log(filters.split(','))
     filters=filters.split(',').forEach((item)=>{
-    
+    console.log(item)
         const [field ,operator,value]=item.split('-')
         if(options.includes(field)){
             queryObject[field]={[operator]:Number(value)}
